@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
+	<PropertyGroup>
+		<folder>.\kido-sdk-win</folder>
+		<version>0.1.0.0</version>
+	</PropertyGroup>
+
+	<Target Name="Clean">
+		<RemoveDir Directories="$(folder)" />
+	</Target>
+
+	<Target Name="Compile">
+		<Message Text="Building msbuildintro" />
+		<MSBuild Projects=".\kido-win.sln" Targets="Rebuild"/>
+	</Target>
+
+	<Target Name="Build" DependsOnTargets="Compile;Clean">
+		<CreateItem Include=".\KidoZen.Client.wp80\bin\Debug\*.dll">
+			<Output TaskParameter="Include" ItemName="wp8BinFiles"/>
+		</CreateItem>
+
+    <CreateItem Include=".\KidoZen.Client.winrt45\bin\Debug\*.dll">
+      <Output TaskParameter="Include" ItemName="winrt45BinFiles"/>
+    </CreateItem>
+
+    <CreateItem Include=".\**\*.*" Exclude=".\*.zip;.\*.msbuildproj;.\**\*.suo;.\**\*.sdf;.\**\*.vsmdi;.\**\*.testsettings;.\**\bin\**;.\**\obj\**;.\.git\**;.\**\.gitignore;.\**\AppPackages\**;.\KidoZen.Client.wp71\**;.\KidoZen.Client.net45\**">
+			<Output TaskParameter="Include" ItemName="sourceFiles"/>
+		</CreateItem>
+
+    <MakeDir Directories="$(folder)" />
+		<MakeDir Directories="$(folder)\bin" />
+    <MakeDir Directories="$(folder)\bin\wp8" />
+    <MakeDir Directories="$(folder)\bin\winrt45" />
+    <MakeDir Directories="$(folder)\source" />
+
+    <Copy SourceFiles="@(wp8BinFiles)" DestinationFolder="$(folder)\bin\wp8" />
+    <Copy SourceFiles="@(winrt45BinFiles)" DestinationFolder="$(folder)\bin\winrt45" />
+    <Copy SourceFiles="@(sourceFiles)" DestinationFolder="$(folder)\source\%(RecursiveDir)" />
+
+		<MSBuild.ExtensionPack.Compression.Zip TaskAction="Create" CompressPath="$(folder)" ZipFileName="$(folder)-$(version).zip"/>
+    </Target>
+</Project>
