@@ -12,7 +12,7 @@ Minimum requirements for using the KidoZen SDK for Windows are:
 
 - Visual Studio 2012
 - Windows Phone SDK 8.0
-- Download [the SDK](http://www.kidozen.com/winsdk) or get the sources from [GitHub](https://github.com/kidozen/kido-win). 
+- Download [the SDK](http://www.kidozen.com/winsdk/kido-win.zip) or get the sources from [GitHub](https://github.com/kidozen/kido-win). 
 
 The folder structure of the SDK is the following:
 
