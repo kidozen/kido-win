@@ -3,7 +3,7 @@
 	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
 	<PropertyGroup>
-		<folder>.\kido-sdk-win</folder>
+		<folder>.\kido-win</folder>
 		<version>0.1.0.0</version>
 	</PropertyGroup>
 
