@@ -199,7 +199,7 @@ namespace KidoZen
             Storage = new Storage(this, config.ValueUri("storage"));
             Notification = new Notification(this, config.ValueUri("notification"));
             Files = new Files(this, config.ValueUri("files"));
-            Authentication = new Authentication(config.Value<string>("domain"), config.Value<JObject>("authConfig"), this.Name);
+            Authentication = new Authentication(marketPlaceUri.Host, config.Value<JObject>("authConfig"), this.Name);
             Service = new Service(this, config.ValueUri("service"));
         }
 
