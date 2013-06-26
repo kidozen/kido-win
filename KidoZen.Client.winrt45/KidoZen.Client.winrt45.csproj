@@ -232,6 +232,7 @@
   <ItemGroup>
     <EmbeddedResource Include="..\src\resources\ADFSToken.xml">
       <Link>Resources\ADFSToken.xml</Link>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="..\src\resources\SOAPRSTTemplate.xml">
       <Link>Resources\SOAPRSTTemplate.xml</Link>
