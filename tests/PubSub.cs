@@ -55,9 +55,6 @@ namespace test
             var first = await pubsub.Publish(new { x = 1 } );
             Assert.AreEqual(HttpStatusCode.Created, first.StatusCode);
 
-            // spend some time
-            Sleep(3000);
-
             // subscribe to the channel
             pubsub.Susbscribe<JObject>((message) =>
                 {
@@ -70,10 +67,12 @@ namespace test
                     throw exception;
                 });
 
+            Sleep(5000);
+
             // do another publish
             var second = await pubsub.Publish(new { x = 2 });
             Assert.AreEqual(HttpStatusCode.Created, first.StatusCode);
-            allDone.WaitOne();
+            if (!allDone.WaitOne(5000)) Assert.Fail("Timeout");
         }
 
         static private void Sleep(int ms)
