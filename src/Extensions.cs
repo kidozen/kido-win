@@ -114,8 +114,8 @@ namespace KidoZen
                     if (headers == null) headers = new Dictionary<string, string>();
                     headers["Content-Type"] = contentType;
                 }
-                writer.Write(content);
-                writer.Flush();
+                await writer.WriteAsync(content);
+                await writer.FlushAsync();
                 stream.Seek(0, SeekOrigin.Begin);
             }
 
@@ -138,7 +138,7 @@ namespace KidoZen
                 writer = new StreamWriter(stream);
                 
                 content.SerializeJson(writer);
-                writer.Flush();
+                await writer.FlushAsync();
                 stream.Seek(0, SeekOrigin.Begin);
 
                 if (headers == null) headers = new Dictionary<string, string>();
@@ -256,7 +256,7 @@ namespace KidoZen
                     {
                         using (var reader = new StreamReader(stream, UTF8Encoding.UTF8))
                         {
-                            dynamic data = reader.ReadToEnd();
+                            dynamic data = await reader.ReadToEndAsync();
                             evt.Data = data;
                         }
                     }
