@@ -34,19 +34,19 @@ namespace KidoZen
             }
         }
 
-        public async Task<ServiceEvent<SMSStatus>> Send(string message)
+        public Task<ServiceEvent<SMSStatus>> Send(string message)
         {
             Validate();
             var url = new Uri(Url, string.Format("?to={0}&message={1}", Number, message));
-            return await url.ExecuteAsync<SMSStatus>(app, method:"POST");
+            return url.ExecuteAsync<SMSStatus>(app, method:"POST");
         }
 
-        public async Task<ServiceEvent<SMSStatus>> GetStatus(string messageId)
+        public Task<ServiceEvent<SMSStatus>> GetStatus(string messageId)
         {
             Validate();
             if (string.IsNullOrWhiteSpace(messageId)) throw new ArgumentNullException("messageId");
 
-            return await Url.Concat(string.Format("/{0}", messageId)).ExecuteAsync<SMSStatus>(app);
+            return Url.Concat(string.Format("/{0}", messageId)).ExecuteAsync<SMSStatus>(app);
         }
 
         private void Validate()

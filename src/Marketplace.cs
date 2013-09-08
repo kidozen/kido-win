@@ -38,9 +38,9 @@ namespace KidoZen
         /// Gets all applications from the marketplace
         /// </summary>
         /// <returns>A JSON array instance</returns>
-        public async Task<ServiceEvent<AppInfo[]>> GetApplications()
+        public Task<ServiceEvent<AppInfo[]>> GetApplications()
         {
-            return await QueryApplications();
+            return QueryApplications();
         }
 
         /// <summary>

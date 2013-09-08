@@ -23,22 +23,22 @@ namespace KidoZen
             Url = endpoint;
         }
 
-        public async Task<ServiceEvent<JToken>> Clear()
+        public Task<ServiceEvent<JToken>> Clear()
         {
-            return await Url.ExecuteAsync<JToken>(app, method: "DELETE");
+            return Url.ExecuteAsync<JToken>(app, method: "DELETE");
         }
 
-        public async Task<ServiceEvent<JToken>>  Write<T>(T message, LogLevel level)
+        public Task<ServiceEvent<JToken>>  Write<T>(T message, LogLevel level)
         {
-            return await new Uri(Url, string.Format("?level={0}", (int)level)).ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
+            return new Uri(Url, string.Format("?level={0}", (int)level)).ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
         }
 
-        public async Task<ServiceEvent<IEnumerable<JToken>>> Query(string query = "{}", string options = null)
+        public Task<ServiceEvent<IEnumerable<JToken>>> Query(string query = "{}", string options = null)
         {
-            return await Query<JToken>(query, options);
+            return Query<JToken>(query, options);
         }
 
-        public async Task<ServiceEvent<IEnumerable<T>>> Query<T>(string query = "{}", string options = null)
+        public Task<ServiceEvent<IEnumerable<T>>> Query<T>(string query = "{}", string options = null)
         {
             if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException("query");
 
@@ -46,17 +46,17 @@ namespace KidoZen
                 WebUtility.UrlEncode(query),
                 WebUtility.UrlEncode(string.IsNullOrWhiteSpace(options) ? "{}" : options));
 
-            return await new Uri(Url, queryString).ExecuteAsync<IEnumerable<T>>(app);
+            return new Uri(Url, queryString).ExecuteAsync<IEnumerable<T>>(app);
         }
 
-        public async Task<ServiceEvent<IEnumerable<JToken>>> All()
+        public Task<ServiceEvent<IEnumerable<JToken>>> All()
         {
-            return await All<JToken>();
+            return All<JToken>();
         }
 
-        public async Task<ServiceEvent<IEnumerable<T>>> All<T>()
+        public Task<ServiceEvent<IEnumerable<T>>> All<T>()
         {
-            return await Query<T>("{}");
+            return Query<T>("{}");
         }
 
     }

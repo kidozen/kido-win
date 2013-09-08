@@ -45,33 +45,33 @@ namespace KidoZen
             }
         }
 
-        public async Task<ServiceEvent<JToken>> Delete()
+        public Task<ServiceEvent<JToken>> Delete()
         {
             Validate();
-            return await Url.ExecuteAsync<JToken>(app, method: "DELETE");
+            return Url.ExecuteAsync<JToken>(app, method: "DELETE");
         }
 
-        public async Task<ServiceEvent<IEnumerable<Config>>> All()
+        public Task<ServiceEvent<IEnumerable<Config>>> All()
         {
             Validate();
-            return await Url.ExecuteAsync<IEnumerable<Config>>(app);
+            return Url.ExecuteAsync<IEnumerable<Config>>(app);
         }
 
-        public async Task<ServiceEvent<JToken>> Save<T>(T value)
+        public Task<ServiceEvent<JToken>> Save<T>(T value)
         {
             Validate();
-            return await Url.ExecuteAsync<JToken>(app, value.ToJToken(), "POST");
+            return Url.ExecuteAsync<JToken>(app, value.ToJToken(), "POST");
         }
 
-        public async Task<ServiceEvent<JToken>> Get()
+        public Task<ServiceEvent<JToken>> Get()
         {
-            return await Get<JToken>();
+            return Get<JToken>();
         }
 
-        public async Task<ServiceEvent<T>> Get<T>()
+        public Task<ServiceEvent<T>> Get<T>()
         {
             Validate();
-            return await Url.ExecuteAsync<T>(app);
+            return Url.ExecuteAsync<T>(app);
         }
 
         private void Validate()
