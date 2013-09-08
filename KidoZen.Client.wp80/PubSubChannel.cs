@@ -55,9 +55,9 @@ namespace KidoZen
             }
         }
 
-        public async Task<ServiceEvent<JToken>> Publish<T>(T message)
+        public Task<ServiceEvent<JToken>> Publish<T>(T message)
         {
-            return await Url.ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
+            return Url.ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
         }
 
         public void Unsubscribe()

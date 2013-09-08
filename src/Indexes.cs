@@ -21,23 +21,23 @@ namespace KidoZen
             Url = url.Concat("indexes");
         }
 
-        public async Task<ServiceEvent<JToken>> All()
+        public Task<ServiceEvent<JToken>> All()
         {
-            return await Url.ExecuteAsync<JToken>(app);
+            return Url.ExecuteAsync<JToken>(app);
         }
 
-        public async Task<ServiceEvent<JToken>> Get(string name)
+        public Task<ServiceEvent<JToken>> Get(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
 
-            return await new Uri(Url, "?name=" + name).ExecuteAsync<JToken>(app);
+            return new Uri(Url, "?name=" + name).ExecuteAsync<JToken>(app);
         }
 
-        public async Task<ServiceEvent<JToken>> Delete(string name)
+        public Task<ServiceEvent<JToken>> Delete(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
 
-            return await new Uri(Url, "?name=" + name).ExecuteAsync<JToken>(app, method:"DELETE");
+            return new Uri(Url, "?name=" + name).ExecuteAsync<JToken>(app, method:"DELETE");
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace KidoZen
         /// <param name="dropDups">a unique index cannot be created on a key that has pre-existing duplicate: values. If you would like to create the index anyway, keeping the first document the database: indexes and deleting all subsequent documents that have duplicate value</param>
         /// <param name="min">for geospatial indexes set the lower bound for the co-ordinates</param>
         /// <param name="max">for geospatial indexes set the high bound for the co-ordinates.</param>
-        public async Task<ServiceEvent<JToken>> Create(string spec, bool safe = false, bool unique = false, bool sparse = false, bool background = false, bool dropDups = false, double? min = null, double? max = null)
+        public Task<ServiceEvent<JToken>> Create(string spec, bool safe = false, bool unique = false, bool sparse = false, bool background = false, bool dropDups = false, double? min = null, double? max = null)
         {
             if (string.IsNullOrWhiteSpace(spec)) throw new ArgumentNullException("spec");
 
@@ -64,7 +64,7 @@ namespace KidoZen
             body["spec"] = spec;
             body["options"] = options;
 
-            return await Url.ExecuteAsync<JToken>(app, options);
+            return Url.ExecuteAsync<JToken>(app, options);
         }
     }
 }

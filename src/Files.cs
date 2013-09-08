@@ -54,13 +54,13 @@ namespace KidoZen
         /// <param name="path">Source file's URL</param>
         /// <param name="timeout">Optional timeout.</param>
         /// <returns>File's stream</returns>
-        public async Task<ServiceEvent<Stream>> Download(string path, TimeSpan? timeout = null)
+        public Task<ServiceEvent<Stream>> Download(string path, TimeSpan? timeout = null)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException("path");
 
             Action<long[]> progress = null;
             if (OnDownloadProgress != null) progress = p => { OnDownloadProgress.Invoke(this, new DownloadProgressArgs(path, p[0], p[1])); };
-            return await buildDownloadUrl(path).ExecuteAsync<Stream>(app, timeout: timeout, onProgress: progress);
+            return buildDownloadUrl(path).ExecuteAsync<Stream>(app, timeout: timeout, onProgress: progress);
         }
 
         /// <summary>
@@ -68,12 +68,12 @@ namespace KidoZen
         /// </summary>
         /// <param name="path">Folder's URL. The URL must ends with character '/'</param>
         /// <returns>Folder information</returns>
-        public async Task<ServiceEvent<FilesBrowseResult>> Browse(string path = "/")
+        public Task<ServiceEvent<FilesBrowseResult>> Browse(string path = "/")
         {
             if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException("path");
 
             var targetUrl = buildBrowseUrl(path);
-            return await targetUrl.ExecuteAsync<FilesBrowseResult>(app);
+            return targetUrl.ExecuteAsync<FilesBrowseResult>(app);
         }
 
         /// <summary>

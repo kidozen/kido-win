@@ -37,18 +37,18 @@ namespace KidoZen
             }
         }
 
-        public async Task<ServiceEvent<JObject>> Invoke(string method)
+        public Task<ServiceEvent<JObject>> Invoke(string method)
         {
-            return await Invoke<JObject>(method, new JObject());
+            return Invoke<JObject>(method, new JObject());
         }
         
-        public async Task<ServiceEvent<JObject>> Invoke<T>(string method, T args)
+        public Task<ServiceEvent<JObject>> Invoke<T>(string method, T args)
         {
             if (string.IsNullOrWhiteSpace(method)) throw new ArgumentNullException("method");
 
             Validate();
             var endpoint = Url.Concat("invoke/" + method);
-            return await endpoint.ExecuteAsync<JObject>(app, args.ToJToken(), method="POST");
+            return endpoint.ExecuteAsync<JObject>(app, args.ToJToken(), method="POST");
         }
 
         private void Validate()
