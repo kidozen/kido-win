@@ -21,13 +21,13 @@ namespace KidoZen
             Url = endpoint;
         }
 
-        public async Task<ServiceEvent<JToken>> Send(Mail mail)
+        public Task<ServiceEvent<JToken>> Send(Mail mail)
         {
             if (mail == null) throw new ArgumentNullException("mail");
             if (string.IsNullOrWhiteSpace(mail.to)) throw new ArgumentNullException("mail.to");
             if (string.IsNullOrWhiteSpace(mail.from)) throw new ArgumentNullException("mail.from");
 
-            return await Url.ExecuteAsync<JToken>(app, mail.ToJToken(), "POST");
+            return Url.ExecuteAsync<JToken>(app, mail.ToJToken(), "POST");
         }
     }
 }

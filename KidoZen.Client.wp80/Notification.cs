@@ -173,31 +173,31 @@ namespace KidoZen
             return result.Clone<string[]>(subscriptions);
         }
 
-        public async Task<ServiceEvent<int>> GetSubscriptionsCount()
+        public Task<ServiceEvent<int>> GetSubscriptionsCount()
         {
             var resource = "/devices/" + HttpUtility.UrlEncode(deviceId) + "/" + HttpUtility.UrlEncode(app.Name) + "?count=true";
-            return await Url.Concat(resource).ExecuteAsync<int>(app);
+            return Url.Concat(resource).ExecuteAsync<int>(app);
         }
 
-        public async Task<ServiceEvent<JToken>> Subscribe(string channelName)
+        public Task<ServiceEvent<JToken>> Subscribe(string channelName)
         {
             if (string.IsNullOrWhiteSpace(channelName)) throw new ArgumentNullException("channelName");
-            return await doSubscribe(channelName);
+            return doSubscribe(channelName);
         }
 
-        public async Task<ServiceEvent<JToken>>Unsubscribe(string channelName)
+        public Task<ServiceEvent<JToken>>Unsubscribe(string channelName)
         {
             if (string.IsNullOrWhiteSpace(channelName)) throw new ArgumentNullException("channelName");
-            return await doUnsubscribe(channelName);
+            return doUnsubscribe(channelName);
         }
 
-        public async Task<ServiceEvent<JToken>> Push(string channelName, NotificationData data)
+        public Task<ServiceEvent<JToken>> Push(string channelName, NotificationData data)
         {
             var resource = "/push/"
                 + HttpUtility.UrlEncode(app.Name) + "/"
                 + HttpUtility.UrlEncode(channelName);
 
-            return await new Uri(resource).ExecuteAsync<JToken>(app, data.ToJToken(), "POST");
+            return new Uri(resource).ExecuteAsync<JToken>(app, data.ToJToken(), "POST");
         }
     }
 }

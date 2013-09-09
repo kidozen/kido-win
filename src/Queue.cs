@@ -38,27 +38,27 @@ namespace KidoZen
             }
         }
 
-        public async Task<ServiceEvent<JToken>> Enqueue<T>(T message)
+        public Task<ServiceEvent<JToken>> Enqueue<T>(T message)
         {
             Validate();
-            return await Url.ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
+            return Url.ExecuteAsync<JToken>(app, message.ToJToken(), "POST");
         }
 
-        public async Task<ServiceEvent<JToken>> Dequeue()
+        public Task<ServiceEvent<JToken>> Dequeue()
         {
-            return await Dequeue<JToken>();
+            return Dequeue<JToken>();
         }
 
-        public async Task<ServiceEvent<T>> Dequeue<T>()
-        {
-            Validate();
-            return await Url.Concat("next").ExecuteAsync<T>(app, method:"DELETE");
-        }
-
-        public async Task<ServiceEvent<JObject>> GetInfo()
+        public Task<ServiceEvent<T>> Dequeue<T>()
         {
             Validate();
-            return await Url.ExecuteAsync<JObject>(app);
+            return Url.Concat("next").ExecuteAsync<T>(app, method:"DELETE");
+        }
+
+        public Task<ServiceEvent<JObject>> GetInfo()
+        {
+            Validate();
+            return Url.ExecuteAsync<JObject>(app);
         }
 
         private void Validate()
