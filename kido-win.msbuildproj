@@ -4,7 +4,7 @@
 	<Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
 	<PropertyGroup>
 		<folder>.\kido-win</folder>
-		<version>0.1.0.1</version>
+		<version>0.1.0.2</version>
 	</PropertyGroup>
 
 	<Target Name="Clean">
