@@ -57,7 +57,7 @@ namespace KidoZen.authentication
                 var contentType = default(string);
                 res.Headers.TryGetValue("Content-Type", out contentType);
 
-                if (contentType==null && !contentType.ToLower().Contains("xml"))
+                if (contentType==null || !(contentType.ToLower().Contains("xml")))
                     throw new Exception(content);
 
                 var doc = XDocument.Parse(content);
