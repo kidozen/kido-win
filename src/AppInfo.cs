@@ -50,7 +50,9 @@ namespace KidoZen
             GitPath = info.Value<string>("gitPath");
             Categories = GetArray<string>(info, "categories");
             Voters = GetArray<string>(info, "voters");
-            AuthConfig = new AuthConfig(info.Value<JObject>("authConfig"));
+
+            var authConfig = info.Value<JObject>("authConfig");
+            AuthConfig = authConfig != null ? new AuthConfig(authConfig) : null;
 
             var uris = new Dictionary<string, string>();
             URLs = uris;

@@ -53,7 +53,8 @@ namespace test
 
             Assert.AreEqual(HttpStatusCode.OK, invokeResult.StatusCode);
             Assert.IsNotNull(invokeResult.Data);
-            Assert.AreEqual("bar", invokeResult.Data.Value<string>("foo"));
+            var serviceResult = invokeResult.Data.Value<JObject>("data");
+            Assert.AreEqual("bar", serviceResult.Value<string>("foo"));
             EnqueueTestComplete();
         }
     }
