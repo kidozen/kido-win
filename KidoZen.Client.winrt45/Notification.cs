@@ -55,11 +55,15 @@ namespace KidoZen
         {
             // If the device has a subscription
             // initialize Windows Phone infrastrucutre
-            var se = await GetSubscriptionsCount();
-            if (se.Data > 0)
+            try
             {
-                var reult = EnableNotifications();
+                var se = await GetSubscriptionsCount();
+                if (se.Data > 0)
+                {
+                    var reult = EnableNotifications();
+                }
             }
+            catch { }
         }
 
         private async Task<PushNotificationChannel> EnableNotifications()

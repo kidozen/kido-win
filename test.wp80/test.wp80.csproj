@@ -97,6 +97,9 @@
     <Compile Include="..\tests\Config.cs">
       <Link>Tests\Config.cs</Link>
     </Compile>
+    <Compile Include="..\tests\DataSource.cs">
+      <Link>Tests\DataSource.cs</Link>
+    </Compile>
     <Compile Include="..\tests\EMail.cs">
       <Link>Tests\EMail.cs</Link>
     </Compile>

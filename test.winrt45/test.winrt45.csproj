@@ -15,6 +15,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>test.winrt45_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>F114DA03E0B53CF5CB9A4D211291D5E39FB8757B</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -114,6 +115,9 @@
     </Compile>
     <Compile Include="..\tests\Config.cs">
       <Link>Tests\Config.cs</Link>
+    </Compile>
+    <Compile Include="..\tests\DataSource.cs">
+      <Link>Tests\DataSource.cs</Link>
     </Compile>
     <Compile Include="..\tests\EMail.cs">
       <Link>Tests\EMail.cs</Link>

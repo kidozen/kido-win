@@ -131,6 +131,9 @@
     <Compile Include="..\src\Configuration.cs">
       <Link>Configuration.cs</Link>
     </Compile>
+    <Compile Include="..\src\DataSource.cs">
+      <Link>DataSource.cs</Link>
+    </Compile>
     <Compile Include="..\src\DownloadProgressArgs.cs">
       <Link>DownloadProgressArgs.cs</Link>
     </Compile>
